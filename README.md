@@ -10,7 +10,7 @@ Or heck, just make separate lists based on the second input field you added in t
 
 Add a search field, and only show the results that match the search criteria. Here are some things you may wish to use while implementing search:
 
-*Array.prototype.find() (very similar to findIndex())
-*HTMLElement.dataset (remember those IDs we stored?)
-*display: none (Heck, you could add a class that includes this rule, and add and move that class from elements you wish to hide.)
+* Array.prototype.find() (very similar to findIndex())
+* HTMLElement.dataset (remember those IDs we stored?)
+* display: none (Heck, you could add a class that includes this rule, and add and move that class from elements you wish to hide.)
 
