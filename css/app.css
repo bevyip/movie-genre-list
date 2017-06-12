@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  flex: 1 0 auto;
+}
+
+.flick.template {
+  display: none;
+}
+
+h1{
+    /*background-color: #99ebff;*/
+    text-align: center;
+    font-family: "Trebuchet MS";
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 20px;
+}
+
+#genre-list{
+  clear: both;
+  flex: 1 0 auto;
+  display: inline-block;
+  float: left;
+  align-items: center;
+  text-align: center;
+  padding: 0.75rem 1.25rem;
+  transition: 0.25s;
+  background-color: black;
+  color: white;
+}
+
+.flick {
+  border: 1px solid #ddd;
+  clear: both;
+  display: flex;
+  width: 100%;
+  float: right;
+  align-items: center;
+  text-align: center;
+  padding: 0.75rem 1.25rem;
+  transition: 0.25s;
+}
+
+.flick + .flick {
+  border-top: 0;
+}
+
+input.input-group-field1{
+    float: left;
+    width: 65%;
+    margin-top: 18px;
+    padding: 18px;
+}
+
+input.input-group-field2{
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 18px;
+    width: 32%;
+    padding: 18px;
+}
+
+.flick-name {
+  flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 200px);
+  margin-right: 1rem;
+}
+
+.actions.button-group {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.actions .button {
+  padding: .65em 0.8em;
+}
+
+.flick.fav {
+  background-color: turquoise;
+  border-color: turquoise;
+}
+
+.flick:first-child button.move-up,
+.flick:last-child button.move-down {
+  background-color: #ddd;
+  color: #eee;
+  cursor: not-allowed;
+}

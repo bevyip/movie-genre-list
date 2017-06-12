@@ -25,10 +25,10 @@
               required 
             >
             <input
-              type="number"
+              type="text"
               class="input-group-field2"
-              name="flickYear"
-              placeholder="Enter year released"
+              name="flickGenre"
+              placeholder="Enter Genre"
               autofocus
               required
             >
@@ -48,15 +48,16 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="medium-8 medium-offset-2 column">
-        <ul class="no-bullet" id="flick-list"></ul>
+    <div class="column">
+        <div class="medium-8 medium-offset-2 column" style="flex: 1 0 auto;">
+            <ul class="no-bullet" id="genre-list" style="width: 40%; margin-right: 1%;">Pick a Genre</ul>
+            <ul class="no-bullet" id="flick-list" style="flex: 1 0 auto; display: inline-block; width: 59%;"></ul>
       </div>
     </div>
 
     <li class="flick template">
         <span class="flick-name"></span>
-        <span class="actionsbutton-group">
+        <span class="actions button-group">
         <button class="edit button">
           <i
             class="fa fa-pencil"
