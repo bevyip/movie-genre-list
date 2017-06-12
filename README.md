@@ -13,3 +13,4 @@ Add a search field, and only show the results that match the search criteria. He
 *Array.prototype.find() (very similar to findIndex())
 *HTMLElement.dataset (remember those IDs we stored?)
 *display: none (Heck, you could add a class that includes this rule, and add and move that class from elements you wish to hide.)
+
