@@ -87,12 +87,22 @@ class App {
             .textContent = flick.genre
     }
 
+    if(flick.year){
+        item
+            .querySelector('.flick-year')
+            .textContent = flick.year
+    }
+
     item
       .querySelector('.flick-name')
       .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
 
     item
       .querySelector('.flick-genre')
+      .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
+
+    item
+      .querySelector('.flick-year')
       .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
 
     item
@@ -182,6 +192,7 @@ class App {
     const listItem = ev.target.closest('.flick')
     const nameField = listItem.querySelector('.flick-name')
     const genreField = listItem.querySelector('.flick-genre')
+    const yearField = listItem.querySelector('.flick-year')
     const btn = listItem.querySelector('.edit.button')
 
     const icon = btn.querySelector('i.fa')
@@ -190,6 +201,7 @@ class App {
       // make it no longer editable
       nameField.contentEditable = false
       genreField.contentEditable = false
+      yearField.contentEditable = false
       icon.classList.remove('fa-check')
       icon.classList.add('fa-pencil')
       btn.classList.remove('success')
@@ -197,10 +209,12 @@ class App {
       // save changes
       flick.name = nameField.textContent
       flick.genre = genreField.textContent
+      flick.year = yearField.textContent
       this.save()
     } else {
       nameField.contentEditable = true
       genreField.contentEditable = true
+      yearField.contentEditable = true
       nameField.focus()
       icon.classList.remove('fa-pencil')
       icon.classList.add('fa-check')
