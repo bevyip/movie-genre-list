@@ -1,128 +1,59 @@
-* {
-  box-sizing: border-box;
-  flex: 1 0 auto;
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+h1 {
+  font-family: 'Abril Fatface', cursive;
+  text-transform: lowercase;
 }
 
-body{
-    background: linear-gradient(to right, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 0%, rgba(188,224,238,1) 100%);
-    background-image: url("http://all4desktop.com/data_images/original/4147986-disney-the-pirate-fairy-2014.jpg");
-    background-size: cover;
-    font-family: "Trebuchet MS"
+h1 span {
+  color: #1779ba;
+}
+
+ul.flick-list {
+  margin: 0;
 }
 
 .flick.template {
   display: none;
 }
 
-h1{
-    background-color: #ffc0cb;
-    text-align: center;
-    font-family: "Trebuchet MS";
-    font-weight: bold;
-    font-size: 50px;
-    margin-top: 20px;
-}
-
-
-/*.categories{
-  clear: both;
-  float: left;
-  display: inline-block;
-  width: 100%;
-  align-items: center;
-  text-align: center;
-  padding: 0.75rem 1.25rem;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  border: none;
-  outline: none;
-}*/
-
-input.search-bar {
-    width: 180px;
-    align-content: center;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-/* When the input field gets focus, change its width to 100% */
-input.search-bar:focus {
-    width: 92%;
-}
-
-input.search-bar{
-  margin-left: 2rem;
-}
-
-#flick-list{
-  display: inline-block;
-  width: 100%;
-  background-color: #99ebff;
-  font-size: 19px;
-}
-
 .flick {
-  border: 3px solid black;
-  clear: both;
+  border-bottom: 1px solid #ddd;
   display: flex;
-  width: 100%;
-  float: right;
   align-items: center;
-  text-align: center;
   padding: 0.75rem 1.25rem;
   transition: 0.25s;
 }
 
-.flick + .flick {
-  border-top: 0;
-}
-
-input.input-group-field2{
-    display: inline-block;
-    width: 13rem;
-    margin-left: -0.7rem;
-}
-
-.small-3 {
-  width: 10rem;
-  margin-left: -3.2rem;
-}
-
-.small-2 {
-  margin-left: inherit;
+.flick:last-child {
+  border-bottom: none;
 }
 
 .flick-name {
   flex-grow: 1;
+  margin-right: 1rem;
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
-  max-width: calc(100% - 200px);
-  margin-right: 1rem;
-}
-
-.flick-genre{
-  margin-right: 1rem;
-}
-
-.flick-year{
-  margin-right: 1rem;
+  text-overflow: ellipsis;
 }
 
 .actions.button-group {
   margin-bottom: 0;
   white-space: nowrap;
-  font-size: 19px;
 }
 
 .actions .button {
   padding: .65em 0.8em;
+  transition: 0.25s;
+}
+
+.actions .button:hover {
+  transform: scale(1.1);
 }
 
 .flick.fav {
-  background-color: turquoise;
-  border-color: turquoise;
+  background-color: #ffc656;
+  border-color: #ffa807;
 }
 
 .flick:first-child button.move-up,
@@ -130,4 +61,29 @@ input.input-group-field2{
   background-color: #ddd;
   color: #eee;
   cursor: not-allowed;
+}
+
+.tabs-panel {
+  padding: 0;
+}
+
+#genres {
+  position: relative;
+}
+
+li.search {
+  position: absolute;
+  right: 0;
+  padding-top: 0.4rem;
+  padding-right: 1rem;
+  width: 40%;
+}
+li.search input {
+  margin: 0;
+}
+li.search .input-group-label {
+  color: #999;
+}
+li.search .input-group {
+  margin: 0;
 }

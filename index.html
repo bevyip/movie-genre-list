@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Flick List</title>
+    <title>Jeffervescence</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
@@ -12,57 +12,37 @@
   </head>
   <body>
     <div class="row">
-      <div class="medium-8 medium-offset-2 column">
-        <h1>A List of Flicks</h1>
+      <div class="medium-10 medium-offset-1 column">
+        <h1><span>Jeff</span>ervescence <small>from Goldblum's house to yours</small></h1>
         <form id="flick-form">
           <div class="row">
-              <div class="small-5 column" style="margin-right: inherit;">
-                <input
+            <div class="small-5 column">
+              <input
                 type="text"
-                class="input-group-field1"
                 name="flickName"
                 placeholder="Name a flick"
                 autofocus
-                required 
-                >
-            </div>
-            <div class="small-4 column" style="margin-right: inherit;">
-                <input
-                type="number"
-                class="input-group-field2"
-                name="flickYear"
-                placeholder="Enter year released"
-                autofocus
                 required
-                >
+              >
+            </div>
+            <div class="small-4 column">
+              <select name="genre" required>
+                <option value="">-- Genre --</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="sci-fi">Sci-Fi</option>
+              </select>
             </div>
             <div class="small-3 column">
-                <select name="genre">
-                    <option value="">- Genre List -</option>
-                    <option value="Action">Action</option>
-                    <option value="Comedy">Comedy</option>
-                    <option value="Horror">Horror</option>
-                    <option value="Romance">Romance</option>
-                </select>
-            </div>
-            <div class="small-2 column">
               <button 
-                class="success button"
+                class="success button expanded"
                 type="submit"
               >
-                 <i
+                <i
                   class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
               </button>
-            </div>
-            <div class="row">
-                    <input
-                        type="text"
-                        class="search-bar"
-                        name="search"
-                        placeholder="Search for a Flick..."
-                    >
             </div>
           </div>
         </form>
@@ -70,20 +50,45 @@
     </div>
 
     <div class="row">
-            <div class="medium-8 medium-offset-2 column">
-                <ul class="no-bullet" id="flick-list"></ul>
-         </div>
-            <!--<div class="medium-10 column" style="display: inline-block;">
-                <button class="categories">Categories</button>
-        </div>-->
+      <div class="medium-10 medium-offset-1 column">
+        <ul class="tabs" data-tabs id="genres">
+          <li class="tabs-title is-active"><a href="#comedy" aria-selected="true">Comedy</a></li>
+          <li class="tabs-title"><a href="#drama">Drama</a></li>
+          <li class="tabs-title"><a href="#sci-fi">Sci-Fi</a></li>
+          <li class="search">
+            <div class="input-group">
+              <span class="input-group-label">
+                <i
+                  class="fa fa-search"
+                  aria-hidden="true"
+                ></i>
+              </span>
+              <input
+                class="input-group-field"
+                type="text"
+                name="q"
+                placeholder="Filter"
+              >
+            </div>
+          </li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="genres">
+          <div class="tabs-panel is-active" id="comedy">
+            <ul class="flick-list" class="no-bullet"></ul>
+          </div>
+          <div class="tabs-panel" id="drama">
+            <ul class="flick-list" class="no-bullet"></ul>
+          </div>
+          <div class="tabs-panel" id="sci-fi">
+            <ul class="flick-list" class="no-bullet"></ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-
     <li class="flick template">
-        <span class="flick-name"></span>
-        <span class="flick-year"></span>
-        <span class="flick-genre"></span>
-        <span class="actions button-group">
+      <span class="flick-name"></span>
+      <span class="actions button-group">
         <button class="edit button">
           <i
             class="fa fa-pencil"
@@ -117,6 +122,8 @@
       </span>
     </li>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
     <script src="app.js"></script>
   </body>
 </html>

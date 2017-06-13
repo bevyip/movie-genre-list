@@ -1,19 +1,58 @@
 class App {
   constructor(selectors) {
-    this.flicks = []
+    this.flicks = {}
     this.max = 0
-    this.list = document
-      .querySelector(selectors.listSelector)
+
     this.template = document
       .querySelector(selectors.templateSelector)
+
+    this.listen(selectors)
+    this.setupLists(selectors.listSelector)
+    this.load()
+  }
+
+  setupLists(listSelector) {
+    this.lists = {}
+    const genres = ['comedy', 'drama', 'sci-fi']
+    genres.map(genre => {
+      this.lists[genre] = document.querySelector(`#${genre} ${listSelector}`)
+    })
+  }
+
+  listen(selectors) {
     document
       .querySelector(selectors.formSelector)
       .addEventListener('submit', this.addFlickViaForm.bind(this))
-    // document
-    //     .querySelector(selectors.searchSelector)
-    //     .addEventListener('submit', this.searchFunction.bind(this))
+    document
+      .querySelector(selectors.searchSelector)
+      .addEventListener('keyup', this.search.bind(this))
+  }
 
-    this.load()
+  search(ev) {
+    const q = ev.currentTarget.value
+    const prevMatches = Array.from(document.querySelectorAll('.flick-name strong'))
+    this.removeElements(prevMatches)
+
+    Array.from(document.querySelectorAll('.flick')).map(listItem => {
+      const nameField = listItem.querySelector('.flick-name')
+      const pattern = new RegExp(q, 'gi')
+      if (nameField.textContent.match(pattern)) {
+        listItem.classList.remove('hide')
+        nameField.innerHTML = nameField.innerHTML.replace(pattern, '<strong>$&</strong>')
+      } else {
+        listItem.classList.add('hide')
+      }
+    })
+  }
+
+  removeElements(elementArr) {
+    elementArr.map(el => {
+      const parent = el.parentNode
+      while(el.firstChild) {
+        parent.insertBefore(el.firstChild, el)
+      }
+      el.remove()
+    })
   }
 
   load() {
@@ -33,13 +72,18 @@ class App {
 
   addFlick(flick) {
     const listItem = this.renderListItem(flick)
-    this.list
-      .insertBefore(listItem, this.list.firstChild)
+    this.lists[flick.genre]
+      .insertBefore(listItem, this.lists[flick.genre].firstChild)
     
     if (flick.id > this.max) {
       this.max = flick.id
     }
-    this.flicks.unshift(flick)
+
+    if (!this.flicks[flick.genre]) {
+      this.flicks[flick.genre] = []
+    }
+
+    this.flicks[flick.genre].unshift(flick)
     this.save()
   }
 
@@ -49,7 +93,6 @@ class App {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
-      year: f.flickYear.value,
       fav: false,
       genre: ev.target.genre.value,
     }
@@ -57,20 +100,15 @@ class App {
     this.addFlick(flick)
 
     f.reset()
+    ev.target.flickName.focus()
   }
 
   save() {
     localStorage
-      .setItem('flicks', JSON.stringify(this.flicks))
-
+      .setItem('flicks', JSON.stringify(Object.keys(this.flicks).reduce((combined, genre) => {
+        return combined.concat(this.flicks[genre])
+      }, [])))
   }
-
-//   searchFunction(){
-//       var input, filter, ul, li, a, i;
-//       input = document.getElementById('searchInput');
-//       filter = input.value.toUpperCase();
-//       ul = document.getElementById
-//   }
 
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
@@ -87,33 +125,13 @@ class App {
       item.classList.add('fav')
     }
 
-    if(flick.genre){
-        item
-            .querySelector('.flick-genre')
-            .textContent = flick.genre
-    }
-
-    if(flick.year){
-        item
-            .querySelector('.flick-year')
-            .textContent = flick.year
-    }
-
     item
       .querySelector('.flick-name')
       .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
 
     item
-      .querySelector('.flick-genre')
-      .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
-
-    item
-      .querySelector('.flick-year')
-      .addEventListener('keypress', this.saveOnEnter.bind(this, flick))
-
-    item
       .querySelector('button.remove')
-      .addEventListener('click', this.removeFlick.bind(this))
+      .addEventListener('click', this.removeFlick.bind(this, flick))
     item
       .querySelector('button.fav')
       .addEventListener('click', this.favFlick.bind(this, flick))
@@ -130,14 +148,15 @@ class App {
     return item
   }
 
-  removeFlick(ev) {
+  removeFlick(flick, ev) {
     const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flick.genre]
 
     // Find the flick in the array, and remove it
-    for (let i = 0; i < this.flicks.length; i++) {
-      const currentId = this.flicks[i].id.toString()
+    for (let i = 0; i < flickArr.length; i++) {
+      const currentId = flickArr[i].id.toString()
       if (listItem.dataset.id === currentId) {
-        this.flicks.splice(i, 1)
+        flickArr.splice(i, 1)
         break
       }
     }
@@ -154,7 +173,6 @@ class App {
       listItem.classList.add('fav')
     } else {
       listItem.classList.remove('fav')
-      listItem.style.backgroundColor = 'none'
     }
     
     this.save()
@@ -162,34 +180,36 @@ class App {
 
   moveUp(flick, ev) {
     const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flick.genre]
 
-    const index = this.flicks.findIndex((currentFlick, i) => {
+    const index = flickArr.findIndex((currentFlick, i) => {
       return currentFlick.id === flick.id
     })
 
     if (index > 0) {
-      this.list.insertBefore(listItem, listItem.previousElementSibling)
+      this.lists[flick.genre].insertBefore(listItem, listItem.previousElementSibling)
 
-      const previousFlick = this.flicks[index - 1]
-      this.flicks[index - 1] = flick
-      this.flicks[index] = previousFlick
+      const previousFlick = flickArr[index - 1]
+      flickArr[index - 1] = flick
+      flickArr[index] = previousFlick
       this.save()
     }
   }
 
   moveDown(flick, ev) {
     const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flick.genre]
 
-    const index = this.flicks.findIndex((currentFlick, i) => {
+    const index = flickArr.findIndex((currentFlick, i) => {
       return currentFlick.id === flick.id
     })
 
-    if (index < this.flicks.length - 1) {
-      this.list.insertBefore(listItem.nextElementSibling, listItem)
+    if (index < flickArr.length - 1) {
+      this.lists[flick.genre].insertBefore(listItem.nextElementSibling, listItem)
       
-      const nextFlick = this.flicks[index + 1]
-      this.flicks[index + 1] = flick
-      this.flicks[index] =  nextFlick
+      const nextFlick = flickArr[index + 1]
+      flickArr[index + 1] = flick
+      flickArr[index] =  nextFlick
       this.save()
     }
   }
@@ -197,8 +217,6 @@ class App {
   edit(flick, ev) {
     const listItem = ev.target.closest('.flick')
     const nameField = listItem.querySelector('.flick-name')
-    const genreField = listItem.querySelector('.flick-genre')
-    const yearField = listItem.querySelector('.flick-year')
     const btn = listItem.querySelector('.edit.button')
 
     const icon = btn.querySelector('i.fa')
@@ -206,21 +224,15 @@ class App {
     if (nameField.isContentEditable) {
       // make it no longer editable
       nameField.contentEditable = false
-      genreField.contentEditable = false
-      yearField.contentEditable = false
       icon.classList.remove('fa-check')
       icon.classList.add('fa-pencil')
       btn.classList.remove('success')
 
       // save changes
       flick.name = nameField.textContent
-      flick.genre = genreField.textContent
-      flick.year = yearField.textContent
       this.save()
     } else {
       nameField.contentEditable = true
-      genreField.contentEditable = true
-      yearField.contentEditable = true
       nameField.focus()
       icon.classList.remove('fa-pencil')
       icon.classList.add('fa-check')
@@ -237,8 +249,9 @@ class App {
 
 const app = new App({
   formSelector: '#flick-form',
-  listSelector: '#flick-list',
-  colSelector: '#genre-list',
+  listSelector: '.flick-list',
   templateSelector: '.flick.template',
-//   searchSelector: '.search-bar'
+  searchSelector: '.search input',
 })
+
+$(document).foundation()
