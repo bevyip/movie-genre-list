@@ -9,10 +9,9 @@ class App {
     document
       .querySelector(selectors.formSelector)
       .addEventListener('submit', this.addFlickViaForm.bind(this))
-    
     // document
-    //     .querySelector(selectors.colSelector)
-    //     .textContent = "HELLO I'M HERE"
+    //     .querySelector(selectors.searchSelector)
+    //     .addEventListener('submit', this.searchFunction.bind(this))
 
     this.load()
   }
@@ -65,6 +64,13 @@ class App {
       .setItem('flicks', JSON.stringify(this.flicks))
 
   }
+
+//   searchFunction(){
+//       var input, filter, ul, li, a, i;
+//       input = document.getElementById('searchInput');
+//       filter = input.value.toUpperCase();
+//       ul = document.getElementById
+//   }
 
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
@@ -234,4 +240,5 @@ const app = new App({
   listSelector: '#flick-list',
   colSelector: '#genre-list',
   templateSelector: '.flick.template',
+//   searchSelector: '.search-bar'
 })
