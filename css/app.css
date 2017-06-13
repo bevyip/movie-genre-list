@@ -16,17 +16,25 @@ h1{
     margin-top: 20px;
 }
 
-#genre-list{
+
+/*.categories{
   clear: both;
-  flex: 1 0 auto;
-  display: inline-block;
   float: left;
+  display: inline-block;
+  width: 100%;
   align-items: center;
   text-align: center;
   padding: 0.75rem 1.25rem;
-  transition: 0.25s;
   background-color: black;
   color: white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}*/
+
+#flick-list{
+  display: inline-block;
+  width: 100%;
 }
 
 .flick {
@@ -45,19 +53,19 @@ h1{
   border-top: 0;
 }
 
-input.input-group-field1{
-    float: left;
-    width: 65%;
-    margin-top: 18px;
-    padding: 18px;
-}
-
 input.input-group-field2{
     display: inline-block;
-    margin-left: 10px;
-    margin-top: 18px;
-    width: 32%;
-    padding: 18px;
+    width: 13rem;
+    margin-left: -0.7rem;
+}
+
+.small-3 {
+  width: 10rem;
+  margin-left: -3.2rem;
+}
+
+.small-2 {
+  margin-left: inherit;
 }
 
 .flick-name {
@@ -66,6 +74,10 @@ input.input-group-field2{
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: calc(100% - 200px);
+  margin-right: 1rem;
+}
+
+.flick-genre{
   margin-right: 1rem;
 }
 

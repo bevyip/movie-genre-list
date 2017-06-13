@@ -15,24 +15,37 @@
       <div class="medium-8 medium-offset-2 column">
         <h1>A List of Flicks</h1>
         <form id="flick-form">
-          <div class="input-group">
-            <input
-              type="text"
-              class="input-group-field1"
-              name="flickName"
-              placeholder="Name a flick"
-              autofocus
-              required 
-            >
-            <input
-              type="text"
-              class="input-group-field2"
-              name="flickGenre"
-              placeholder="Enter Genre"
-              autofocus
-              required
-            >
-            <div class="input-group-button">
+          <div class="row">
+              <div class="small-5 column" style="margin-right: inherit;">
+                <input
+                type="text"
+                class="input-group-field1"
+                name="flickName"
+                placeholder="Name a flick"
+                autofocus
+                required 
+                >
+            </div>
+            <div class="small-4 column" style="margin-right: inherit;">
+                <input
+                type="number"
+                class="input-group-field2"
+                name="flickYear"
+                placeholder="Enter year released"
+                autofocus
+                required
+                >
+            </div>
+            <div class="small-3 column">
+                <select name="genre">
+                    <option value="">- Genre List -</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Romance">Romance</option>
+                </select>
+            </div>
+            <div class="small-2 column">
               <button 
                 class="success button"
                 type="submit"
@@ -48,15 +61,19 @@
       </div>
     </div>
 
-    <div class="column">
-        <div class="medium-8 medium-offset-2 column" style="flex: 1 0 auto;">
-            <ul class="no-bullet" id="genre-list" style="width: 40%; margin-right: 1%;">Pick a Genre</ul>
-            <ul class="no-bullet" id="flick-list" style="flex: 1 0 auto; display: inline-block; width: 59%;"></ul>
-      </div>
+    <div class="row">
+            <div class="medium-8 medium-offset-2 column">
+                <ul class="no-bullet" id="flick-list"></ul>
+         </div>
+            <!--<div class="medium-10 column" style="display: inline-block;">
+                <button class="categories">Categories</button>
+        </div>-->
     </div>
+
 
     <li class="flick template">
         <span class="flick-name"></span>
+        <span class="flick-genre"></span>
         <span class="actions button-group">
         <button class="edit button">
           <i
