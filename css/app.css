@@ -3,12 +3,19 @@
   flex: 1 0 auto;
 }
 
+body{
+    background: linear-gradient(to right, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 0%, rgba(188,224,238,1) 100%);
+    background-image: url("http://all4desktop.com/data_images/original/4147986-disney-the-pirate-fairy-2014.jpg");
+    background-size: cover;
+    font-family: "Trebuchet MS"
+}
+
 .flick.template {
   display: none;
 }
 
 h1{
-    /*background-color: #99ebff;*/
+    background-color: #ffc0cb;
     text-align: center;
     font-family: "Trebuchet MS";
     font-weight: bold;
@@ -32,13 +39,31 @@ h1{
   outline: none;
 }*/
 
+input.search-bar {
+    width: 180px;
+    align-content: center;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input.search-bar:focus {
+    width: 92%;
+}
+
+input.search-bar{
+  margin-left: 2rem;
+}
+
 #flick-list{
   display: inline-block;
   width: 100%;
+  background-color: #99ebff;
+  font-size: 19px;
 }
 
 .flick {
-  border: 1px solid #ddd;
+  border: 3px solid black;
   clear: both;
   display: flex;
   width: 100%;
@@ -88,6 +113,7 @@ input.input-group-field2{
 .actions.button-group {
   margin-bottom: 0;
   white-space: nowrap;
+  font-size: 19px;
 }
 
 .actions .button {
